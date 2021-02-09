@@ -21,6 +21,25 @@ s4
 Lógica para Computação, João
 Comunicação de Dados, José
 Estruturas de Dados, Tomás
+s5
+Análise de Algoritmos, Alice
+Grafos, Alice
+Sistemas Operacionais, Carlos
+Eletrônica, Santos
+Engenharia de Software, Marcio
+s6
+Linguagens de Programação, Fernanda
+Teoria da Computação, João
+Sistemas Embarcados, Santos
+Redes, Tomás
+s7
+Compiladores, Beatriz
+Projeto de Sistemas, Alice
+Inteligência Artificial, Amanda
+s8
+Gestão de Projetos, Daniel
+Processamento de Imagens, Beatriz
+Inteligência Computacional Aplicada, Amanda
 """
 
 entrada = entrada.split('\n')
