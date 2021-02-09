@@ -3,6 +3,9 @@
 
 Repositório do projeto da disciplina Lógica para Computação
 
-Membros:
+## Membros:
 - Pedro Sousa
 - Brena Amorim
+
+## Tema:
+Alocação de Horários
