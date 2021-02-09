@@ -1,35 +1,73 @@
-from Formulas import *
-from Evaluator import *
+import re
+from TimeAllocationModel import *
+
+data = []
+dict_semestre = {}
+array_semestre = []
+dict_disciplina = {}
+
+print("Alocação de Horários")
 
 
-def main():
-	evaluator = Evaluator()
+entrada = """s1
+Circuitos Digitais, Carlos
+Fundamentos de Programação, Daniel
+s2
+Laboratório de Programação, Samuel
+s3
+POO, Marcio
+Programação Linear, Ana
+s4
+Lógica para Computação, João
+Comunicação de Dados, José
+Estruturas de Dados, Tomás
+s5
+Análise de Algoritmos, Alice
+Grafos, Alice
+Sistemas Operacionais, Carlos
+Eletrônica, Santos
+Engenharia de Software, Marcio
+s6
+Linguagens de Programação, Fernanda
+Teoria da Computação, João
+Sistemas Embarcados, Santos
+Redes, Tomás
+s7
+Compiladores, Beatriz
+Projeto de Sistemas, Alice
+Inteligência Artificial, Amanda
+s8
+Gestão de Projetos, Daniel
+Processamento de Imagens, Beatriz
+Inteligência Computacional Aplicada, Amanda
+"""
 
-	atomP = Atom("p")
-	atomQ = Atom("q")
-	atomR = Atom("r")
-	atomR = Atom("r")
+entrada = entrada.split('\n')
 
-	formula1 = Not(atomR) 			  # ~r
-	formula2 = And(atomP, atomQ) 	  # p ^ q
-	formula3 = Or(atomP, atomR) 	  # p v r
-	formula4 = Implies(atomP, atomR)  # p -> r
-	formula5 = And(atomP, Not(atomP)) # p ^ ~p
+for i in range(len(entrada) - 1):
+    entrada_semestre = re.search("^[sS][0-9]{0,2}$", entrada[i])
+    if entrada_semestre is not None:
+        semestre = entrada_semestre.string
+        dict_semestre = {semestre: None}
 
-	atomSatisfability = evaluator.satisfability(atomP, mode=Evaluator.satisfactory)
-	notSatisfability = evaluator.satisfability(formula1, mode=Evaluator.satisfactory)
-	andSatisfability = evaluator.satisfability(formula2, mode=Evaluator.satisfactory)
-	orDoubleSatisfactory = evaluator.satisfability(formula3, mode=Evaluator.doubleSatisfactory)
-	impliesAllModels = evaluator.satisfability(formula4, mode=Evaluator.allModels)
-	unsatisfactory = evaluator.satisfability(formula5, mode=Evaluator.satisfactory)
+    entrada_disciplina = re.findall("[a-zA-Z-áàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ\s]+", entrada[i])
+    if entrada_disciplina is not None and len(entrada_disciplina) == 2:
+        if entrada_disciplina is not None and entrada_disciplina != 's':
+            dict_disciplina = {"professor": entrada_disciplina[1].strip(" "), "disciplina": entrada_disciplina[0]}
+            array_semestre.append(dict_disciplina)
 
-	print(atomSatisfability)
-	print(notSatisfability)
-	print(andSatisfability)
-	print(orDoubleSatisfactory)
-	print(impliesAllModels)
-	print(unsatisfactory)
+    if i < len(entrada):
+        nova_entrada = re.search("^[sS][0-9]{0,2}$", entrada[i + 1])
+
+        if nova_entrada is not None and nova_entrada != semestre or entrada[i + 1] == '':
+            dict_semestre = {semestre: array_semestre}
+            data.append(dict_semestre)
+            array_semestre = []
 
 
-if __name__ == "__main__":
-	main()
+solution = time_allocation_solution(data)
+for atom in solution:
+    if solution[atom]:
+        print(atom + ": " + str(solution[atom]))
+
+
