@@ -8,12 +8,10 @@ evaluator = Evaluator()
 def andAll(list_formulas):
     if len(list_formulas) == 1:
         return list_formulas[0]
-    elif len(list_formulas) > 1:
-        first_formula = list_formulas[0]
-        del list_formulas[0]
-        for formula in list_formulas:
-            first_formula = And(first_formula, formula)
-        return first_formula
+    elif len(list_formulas) == 2:
+        return Ant(list_formulas[0], list_formulas[1])
+    elif len(list_formulas)  > 2:
+        return AndAll(*list_formulas)
     else:
         return None
 

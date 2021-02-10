@@ -149,6 +149,45 @@ class And(BinaryFormula):
     def clone(self):
         return And(self.left.clone(), self.right.clone())
 
+class AndAll(Formula):
+    identifier = "andAll"
+    unicodeString = " " + u"\u2227" + " "
+
+    def __init__(self, *formulas):
+        self.formulas = list(formulas)
+
+    def __str__(self):
+        return "(" + self.unicodeString.join([str(formula) for formula in self.formulas]) + ")"
+
+    def __eq__(self, other):
+        exists = False
+        if isinstance(other, AndAll):
+            listOfFormulaNames = [str(formula) for formula in self.formulas]
+            for formula in other.formulas:
+                exists = str(formula) in listOfFormulaNames
+        return exists
+
+    def __hash__(self):
+        return hash(hash([hash(formula) for formula in self.formulas]), "AndAll")
+
+    def subformula(self):
+        return {str(self)}.union(set([subformula for formula in self.formulas for subformula in formula.subformula()]))
+
+    def atoms(self):
+        return set([atom for formula in self.formulas for atom in formula.atoms()])
+
+    def rawAtoms(self):
+        return set([atom for formula in self.formulas for atom in formula.rawAtoms()])
+
+    def numberOfAtoms(self):
+        return len(self.atoms())
+
+    def numberOfConnectives(self):
+        return sum([formula.numberOfConnectives() for formula in self.formulas], len(self.formulas) - 1)
+
+    def clone(self):
+        return AndAll(*[formula.clone() for formula in self.formulas])
+
 
 class Or(BinaryFormula):
     identifier = "or"
@@ -167,6 +206,7 @@ class Or(BinaryFormula):
         return super().__hash__(Or.identifier)
 
     def subformula(self):
+        subformulasTuple = tuple(formula.subformula() for formula in subformula)
         return super().subformula()
 
     def atoms(self):

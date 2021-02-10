@@ -16,8 +16,7 @@ class Evaluator:
             return definition.get(formula.name)
 
         if isinstance(formula, Not):
-            return not self.truthValueOf(formula.inner, definition) if self.truthValueOf(formula.inner,
-                                                                                         definition) != None else None
+            return not self.truthValueOf(formula.inner, definition) if self.truthValueOf(formula.inner, definition) != None else None
 
         if isinstance(formula, And):
             return self.truthValueOf(formula.left, definition) and self.truthValueOf(formula.right, definition)
@@ -26,12 +25,16 @@ class Evaluator:
             return self.truthValueOf(formula.left, definition) or self.truthValueOf(formula.right, definition)
 
         if isinstance(formula, Implies):
-            if self.truthValueOf(formula.left, definition) == False or self.truthValueOf(formula.right,
-                                                                                         definition) == True:
+            if self.truthValueOf(formula.left, definition) == False or self.truthValueOf(formula.right, definition) == True:
                 return True
-            elif self.truthValueOf(formula.left, definition) == True and self.truthValueOf(formula.right,
-                                                                                           definition) == False:
+            elif self.truthValueOf(formula.left, definition) == True and self.truthValueOf(formula.right, definition) == False:
                 return False
+
+        if isinstance(formula, AndAll):
+            value = True
+            for atom in set(formula.formulas):
+                value = value and self.truthValueOf(atom, definition)
+            return value
 
         return None
 
@@ -40,9 +43,11 @@ class Evaluator:
         numberOfAtoms = len(atoms)
         numberOfEvaluations = 2 ** numberOfAtoms
 
+        print("Number of Lines: ", numberOfEvaluations)
         satisfactoryDefinitions = []
 
         for evaluation in range(numberOfEvaluations):
+            # print(evaluation)
             binaryWord = integerToBinaryString(evaluation)  # Check Utils function
 
             evaluationValues = [stringToBoolean(bit) for bit in binaryWord]  # Check Utils function
