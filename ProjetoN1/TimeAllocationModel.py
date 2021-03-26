@@ -9,7 +9,7 @@ def andAll(list_formulas):
     if len(list_formulas) == 1:
         return list_formulas[0]
     elif len(list_formulas) == 2:
-        return Ant(list_formulas[0], list_formulas[1])
+        return And(list_formulas[0], list_formulas[1])
     elif len(list_formulas)  > 2:
         return AndAll(*list_formulas)
     else:
