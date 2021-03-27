@@ -1,0 +1,13 @@
+c Lista 9
+c Questão 1
+c Premissa: a -> (b v c)
+c Premissa: (b v c) -> d
+c Conclusão: a -> d
+c Formula: a -> (b v c) ^ (b v c) -> d ^ ~(a -> d)
+c Formula CNF: (¬a ∨ b ∨ c) ∧ (¬b ∨ d) ∧ (¬c ∨ d) ∧ a ∧ ¬d
+p cnf 4 5
+-1 2 3 0
+-2 4 0
+-3 4 0
+1 0
+-4 0

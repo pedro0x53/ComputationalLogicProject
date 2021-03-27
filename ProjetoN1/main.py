@@ -1,7 +1,8 @@
 import re
 from TimeAllocationModel import *
+from DPLL import *
 
-print("Alocação de Horários")
+# print("Alocação de Horários")
 
 entrada = """s1
 p0a, d0a
@@ -37,5 +38,9 @@ data.append({nomeSemestreAtual: professoresDisciplinas})
 nomeSemestreAtual = None
 professoresDisciplinas = []
 
-# Solução
-print(time_allocation_solution(data))
+ 
+if __name__ == "__main__":
+    formula = time_allocation_solution(data)
+    dpll = DPLL()
+    print(dpll.runFromFormula(formula))
+    print(dpll.runFromFile("CNF Files/Satisfactory/uf50-01.cnf"))
