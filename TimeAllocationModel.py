@@ -154,5 +154,4 @@ def time_allocation_solution(aulas):
         print("Nenhuma solução foi encontrada.")
         return 0
 
-    # return evaluator.satisfability(finalFormula, mode=Evaluator.satisfactory)
     return finalFormula

@@ -38,12 +38,11 @@ class Evaluator:
 
         return None
 
-    def satisfability(self, formula, mode=1):
+    def satisfiability(self, formula, mode=1):
         atoms = formula.atoms()  # Keys for the definition dictionary
         numberOfAtoms = len(atoms)
         numberOfEvaluations = 2 ** numberOfAtoms
 
-        print("Number of Lines: ", numberOfEvaluations)
         satisfactoryDefinitions = []
 
         for evaluation in range(numberOfEvaluations):

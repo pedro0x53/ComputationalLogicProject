@@ -39,8 +39,11 @@ nomeSemestreAtual = None
 professoresDisciplinas = []
 
  
-if __name__ == "__main__":
+def timeAllocation():
     formula = time_allocation_solution(data)
     dpll = DPLL()
     print(dpll.runFromFormula(formula))
-    print(dpll.runFromFile("CNF Files/Satisfactory/uf50-01.cnf"))
+    
+
+def getFormula():
+    return time_allocation_solution(data)
