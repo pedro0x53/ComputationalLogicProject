@@ -8,7 +8,7 @@ entrada = """s1
 p0a, d0a
 p1a, d1a
 s2
-p0b, d0b
+p0a, d0b
 p1b, d1b
 """
 

@@ -149,6 +149,7 @@ class And(BinaryFormula):
     def clone(self):
         return And(self.left.clone(), self.right.clone())
 
+
 class AndAll(Formula):
     identifier = "andAll"
     unicodeString = " " + u"\u2227" + " "
@@ -169,6 +170,9 @@ class AndAll(Formula):
 
     def __hash__(self):
         return hash(hash([hash(formula) for formula in self.formulas]), "AndAll")
+
+    def formulas_andAll(self):
+        return self.formulas
 
     def subformula(self):
         return {str(self)}.union(set([subformula for formula in self.formulas for subformula in formula.subformula()]))

@@ -51,5 +51,5 @@ def timeComparison():
 
 if __name__ == "__main__":
     runDPLL()
-    timeComparation()
+    timeComparison()
 
