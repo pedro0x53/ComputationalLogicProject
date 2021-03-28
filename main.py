@@ -1,6 +1,7 @@
 import time
 from TimeAllocation import *
-# from SATModerno import *
+from SATModerno import *
+from SATModerno_fromFormula import *
 from DPLL import *
 from Evaluator import *
 
@@ -35,7 +36,20 @@ def timeComparison():
     print('\n\nTime Comparison\n')
     formula = getFormula()
 
-    print('DPLL')
+    print('PySAT')
+    sat = SATModerno_fromFile()
+    sat_start_time = time.time()
+    sat.runPySAT_fromFile('CNF Files/Satisfactory/uf50-01.cnf')
+    print("Time:", time.time() - sat_start_time)
+
+    # Acho que está dando false porque a formula não está do mesmo formato dos arquivos
+    print('PySAT')
+    sat2 = SATModerno_fromFormula()
+    sat2_start_time = time.time()
+    sat2.runPySAT_fromFormula(formula)
+    print("Time:", time.time() - sat2_start_time)
+
+    print('\nDPLL')
     dpll = DPLL()
     dpll_start_time = time.time()
     dpll.runFromFormula(formula)

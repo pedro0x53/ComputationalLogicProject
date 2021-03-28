@@ -47,7 +47,7 @@ formulas4 = [formula]
 valuesFormulas4 = [1]
 start_time = time.time()
 print()
-print(satisfiability_tableaux(start_time, formulas4, valuesFormulas4))
+print(satisfiability_tableaux(start_time, formulas4, valuesFormulas4, max_time=15))
 end_time = time.time()
 print('Time:', end_time - start_time)
 
