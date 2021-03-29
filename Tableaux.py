@@ -70,6 +70,7 @@ def verify_branches(branches, premises):
 
 
 def verifying_contradictions(branches, premises, valuesFormulas):
+    # if current branch has contradictions and tuple has any branches. It's a closed branch
     if hasContradictions(premises) and branches != []:
         # print()
         # print(print_formulas(premises))
@@ -77,19 +78,23 @@ def verifying_contradictions(branches, premises, valuesFormulas):
         # print("Closed Branch")
         return [True, new_valuesFormulas]
 
+    # if current branch has contradictions and tuple hasn't any branches. It's a closed tableaux
     if hasContradictions(premises) and branches == []:
         # print()
         # print(print_formulas(premises))
         print("Closed Tableaux, the formula is insatisfiable")
         return [False, None]
 
+    # if any rule can be applied and hasn't contradictions on branch. It's an open branch
     if not hasContradictions(premises) and branches != [] and not valuesFormulas.__contains__(1):
         # print()
         # print(print_formulas(premises))
-        new_valuesFormulas = verify_branches(branches, premises)
-        # print("Saturated Branch")
-        return [True, new_valuesFormulas]
+        # new_valuesFormulas = verify_branches(branches, premises)
+        print("Saturated and open branch - Open Tableaux, the formula is satisfiable")
+        return [False, None]
+        # return [True, new_valuesFormulas]
 
+    # if hasn't branches and contradictions, and any rule can be applied. It's a open tableaux
     if not hasContradictions(premises) and branches == [] and not valuesFormulas.__contains__(1):
         # print()
         # print(print_formulas(premises))
@@ -98,6 +103,15 @@ def verifying_contradictions(branches, premises, valuesFormulas):
 
     else:
         return None
+
+
+def has_or(premisses, valuesFormulas):
+    count = 0
+    for formula in premisses:
+        if isinstance(formula, Or):
+            if valuesFormulas[count] == 1:
+                return count
+        count += 1
 
 
 def print_formulas(formulas):
@@ -206,7 +220,14 @@ def satisfiability_tableaux(start_time, formulas, valuesFormulas, existsBranches
                     count += 1
                     continue
 
-                formulas_generated = beta_formulas(formula)
+                # Applies or rules first
+                if has_or(formulas, valuesFormulas) is not None:
+                    count = has_or(formulas, valuesFormulas)
+                    formulas_generated = beta_formulas(formulas[count])
+                else:
+                    # Return counting
+                    count = formulas.index(formula)
+                    formulas_generated = beta_formulas(formula)
 
                 # Verifies if a rule can be applied
                 if valuesFormulas[count] == 1:

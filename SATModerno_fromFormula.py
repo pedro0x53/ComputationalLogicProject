@@ -7,9 +7,13 @@ class SATModerno_fromFormula:
         self.cnf = CNF()
 
     def runPySAT_fromFormula(self, formula):
+        list_clauses = []
         relationAndClauses = self.cnf.formulaToCNFClauses(formula)
         clauses = list(relationAndClauses.get("clauses"))
-
         glucose = Glucose3()
-        glucose.append_formula(clauses)
-        print(glucose.solve())
+
+        for clause in clauses:
+            list_clauses.append(list(clause))
+
+        glucose.append_formula(list_clauses)
+        return glucose.solve()

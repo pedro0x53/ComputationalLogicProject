@@ -17,8 +17,8 @@ import time
 # print('Time:', end_time - start_time)
 #
 #
-# # Example 2
-# # p → q, q → r
+# Example 2
+# p → q, q → r
 # valuesFormulas2 = [1, 1]
 # formulas2 = [formula1, formula2]
 # start_time = time.time()
@@ -26,7 +26,7 @@ import time
 # print(satisfiability_tableaux(start_time, formulas2, valuesFormulas2))
 # end_time = time.time()
 # print('Time:', end_time - start_time)
-#
+
 #
 # # Example 3
 # # ((p ∨ q) ∧ (¬p ∧ ¬q))
@@ -47,39 +47,39 @@ formulas4 = [formula]
 valuesFormulas4 = [1]
 start_time = time.time()
 print()
-print(satisfiability_tableaux(start_time, formulas4, valuesFormulas4, max_time=15))
+print(satisfiability_tableaux(start_time, formulas4, valuesFormulas4, max_time=30000))
 end_time = time.time()
 print('Time:', end_time - start_time)
 
 
-# Verifying unsatisfiability - semester
-formulas5 = [formula]
-formulas5.append(And(Atom('s1_6_p0a_d0a'), Atom('s1_6_p1a_d1a')))
-valuesFormulas5 = [1, 1]
-start_time = time.time()
-print()
-print(satisfiability_tableaux(start_time, formulas5, valuesFormulas5))
-end_time = time.time()
-print('Time:', end_time - start_time)
-
-
-# Verifying unsatisfiability -  professor
-formulas6 = [formula]
-formulas6.append(And(Atom('s1_3_p0a_d0a'), Atom('s2_3_p0a_d0b')))
-valuesFormulas6 = [1, 1]
-start_time = time.time()
-print()
-print(satisfiability_tableaux(start_time, formulas6, valuesFormulas6))
-end_time = time.time()
-print('Time:', end_time - start_time)
-
-
-# Verifying unsatisfiability - schedule
-formulas7 = [formula]
-formulas7.append(And(Atom('s1_8_p0a_d0a'), Atom('s1_10_p0a_d0a')))
-valuesFormulas7 = [1, 1]
-start_time = time.time()
-print()
-print(satisfiability_tableaux(start_time, formulas7, valuesFormulas7))
-end_time = time.time()
-print('Time:', end_time - start_time)
+# # Verifying unsatisfiability - semester
+# formulas5 = [formula]
+# formulas5.append(And(Atom('s1_6_p0a_d0a'), Atom('s1_6_p1a_d1a')))
+# valuesFormulas5 = [1, 1]
+# start_time = time.time()
+# print()
+# print(satisfiability_tableaux(start_time, formulas5, valuesFormulas5))
+# end_time = time.time()
+# print('Time:', end_time - start_time)
+#
+#
+# # Verifying unsatisfiability -  professor
+# formulas6 = [formula]
+# formulas6.append(And(Atom('s1_3_p0a_d0a'), Atom('s2_3_p0a_d0b')))
+# valuesFormulas6 = [1, 1]
+# start_time = time.time()
+# print()
+# print(satisfiability_tableaux(start_time, formulas6, valuesFormulas6))
+# end_time = time.time()
+# print('Time:', end_time - start_time)
+#
+#
+# # Verifying unsatisfiability - schedule
+# formulas7 = [formula]
+# formulas7.append(And(Atom('s1_8_p0a_d0a'), Atom('s1_10_p0a_d0a')))
+# valuesFormulas7 = [1, 1]
+# start_time = time.time()
+# print()
+# print(satisfiability_tableaux(start_time, formulas7, valuesFormulas7))
+# end_time = time.time()
+# print('Time:', end_time - start_time)
